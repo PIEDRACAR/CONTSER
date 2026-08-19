@@ -83,8 +83,8 @@ function getExportDataset(pane){
       er.gastosNoOp.forEach(g=>rows.push(['',g.cod,g.nom,-g.total]));
       rows.push(['','','TOTAL GASTOS NO OPERACIONALES',-er.totalGastosNoOp],
         ['','','UTILIDAD ANTES DE PARTICIPACIÓN E IMPUESTOS',er.utilidadAntes],
-        ['','','15% Participación Trabajadores',-er.partTrab],
-        ['','','Impuesto a la Renta estimado (25%)',-er.irEstimado],
+        ['','',''+Math.round(PCT_PART_TRAB*100)+'% Participación Trabajadores',-er.partTrab],
+        ['','','Impuesto a la Renta estimado ('+Math.round(PCT_IR_SOC*100)+'%)',-er.irEstimado],
         ['','','RESULTADO NETO ESTIMADO',round2(er.utilidadAntes-er.partTrab-er.irEstimado)],
         ['','','IVA Crédito Tributario (informativo)',er.totalIVA]);
       return {title:'Estado de Resultados',headers:['Sección','Código','Cuenta','Monto'],rows,noTotals:true};
