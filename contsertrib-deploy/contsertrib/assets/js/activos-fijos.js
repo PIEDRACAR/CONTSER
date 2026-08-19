@@ -8,9 +8,9 @@ const saveAF = () => LS.set(AF_K, ACTIVOS_FIJOS);
 
 /* ---------- Grupos SRI de depreciación ---------- */
 const SRI_ACTIVOS_GRUPOS = [
-  {cod:'1',nom:'Edificaciones',vidaUtil:33,pctAnual:3.03},
+  {cod:'1',nom:'Edificaciones',vidaUtil:20,pctAnual:5},
   {cod:'2',nom:'Vehículos',vidaUtil:5,pctAnual:20},
-  {cod:'3',nom:'Maquinaria y equipos de producción',vidaUtil:12,pctAnual:8.33},
+  {cod:'3',nom:'Maquinaria y equipos de producción',vidaUtil:10,pctAnual:10},
   {cod:'4',nom:'Muebles y enseres de oficina',vidaUtil:10,pctAnual:10},
   {cod:'5',nom:'Equipos de computación y software',vidaUtil:3,pctAnual:33.33},
   {cod:'6',nom:'Instalaciones y mejoras',vidaUtil:20,pctAnual:5},
@@ -21,15 +21,15 @@ const SRI_ACTIVOS_GRUPOS = [
 
 /* Mapa de grupo → cuentas contables */
 const ACTIVO_CUENTA_MAP = {
-  '1':{cta:'1.1.3.01',nom:'Edificaciones',depAcum:'1.2.1.01'},
-  '2':{cta:'1.1.3.02',nom:'Vehículos',depAcum:'1.2.1.02'},
-  '3':{cta:'1.1.3.03',nom:'Maquinaria y equipos',depAcum:'1.2.1.03'},
-  '4':{cta:'1.1.3.04',nom:'Muebles y enseres',depAcum:'1.2.1.04'},
-  '5':{cta:'1.1.3.05',nom:'Equipos de computación',depAcum:'1.2.1.05'},
-  '6':{cta:'1.1.3.06',nom:'Instalaciones y mejoras',depAcum:'1.2.1.06'},
-  '7':{cta:'1.1.3.07',nom:'Envases y embalajes',depAcum:'1.2.1.07'},
-  '8':{cta:'1.1.3.08',nom:'Equipos de laboratorio',depAcum:'1.2.1.08'},
-  '9':{cta:'1.1.3.09',nom:'Otros activos fijos',depAcum:'1.2.1.09'}
+  '1':{cta:'1.2.1.02',nom:'Edificaciones',depAcum:'1.2.1.09.001'},
+  '2':{cta:'1.2.1.05',nom:'Vehículos',depAcum:'1.2.1.09.004'},
+  '3':{cta:'1.2.1.06',nom:'Maquinaria y equipos',depAcum:'1.2.1.09.005'},
+  '4':{cta:'1.2.1.04',nom:'Muebles y enseres',depAcum:'1.2.1.09.003'},
+  '5':{cta:'1.2.1.03',nom:'Equipos de computación',depAcum:'1.2.1.09.002'},
+  '6':{cta:'1.2.1.08',nom:'Instalaciones y mejoras',depAcum:'1.2.1.09.006'},
+  '7':{cta:'1.2.1.10',nom:'Envases y embalajes',depAcum:'1.2.1.09.006'},
+  '8':{cta:'1.2.1.07',nom:'Equipos de oficina',depAcum:'1.2.1.09.006'},
+  '9':{cta:'1.2.1.10',nom:'Otros activos fijos',depAcum:'1.2.1.09.006'}
 };
 
 /* ---------- Helpers ---------- */
@@ -147,6 +147,12 @@ function eliminarActivo(id){
   saveAF();
   renderActivosFijos();
   showToast('Activo eliminado');
+}
+
+/* ---------- Render principal ---------- */
+function renderActivosFijos(){
+  const container = document.getElementById('activos-container');
+  if(container) buildActivosView(container);
 }
 
 /* ---------- Vista HTML ---------- */
@@ -308,3 +314,4 @@ window.bajaActivoFijo = bajaActivoFijo;
 window.confirmarBajaActivo = confirmarBajaActivo;
 window.exportActivosPDF = exportActivosPDF;
 window.buildActivosView = buildActivosView;
+window.renderActivosFijos = renderActivosFijos;
